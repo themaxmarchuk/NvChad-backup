@@ -69,10 +69,13 @@ components.active[1][1] = {
       bg = colors.nord_blue,
    },
 
-   right_sep = { str = statusline_style.right, hl = {
-      fg = colors.nord_blue,
-      bg = colors.lightbg,
-   } },
+   right_sep = {
+      str = statusline_style.right,
+      hl = {
+         fg = colors.nord_blue,
+         bg = colors.lightbg,
+      },
+   },
 }
 
 components.active[1][2] = {

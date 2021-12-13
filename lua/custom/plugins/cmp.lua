@@ -64,8 +64,8 @@ cmp.setup {
       { name = "path" },
    },
    experimental = {
-     ghost_text = {
-       hl_group = "Comment"
-     }
-   }
+      ghost_text = {
+         hl_group = "Comment",
+      },
+   },
 }

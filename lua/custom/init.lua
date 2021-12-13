@@ -32,21 +32,28 @@ local hooks = require "core.hooks"
 -- examples below:
 
 hooks.add("install_plugins", function(use)
-  use {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    requires = { "nvim-treesitter/nvim-treesitter" },
-    event = "BufRead"
-  }
-  use "folke/tokyonight.nvim"
-  use "folke/lua-dev.nvim"
-  use {
-    "themaxmarchuk/tailwindcss-colors.nvim",
-    opt = true,
-    module = "tailwindcss-colors",
-    config = function ()
-      require("tailwindcss-colors").setup()
-    end
-  }
+   use {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      requires = { "nvim-treesitter/nvim-treesitter" },
+      event = "BufRead",
+   }
+   use "folke/tokyonight.nvim"
+   use "folke/lua-dev.nvim"
+   use {
+      "themaxmarchuk/tailwindcss-colors.nvim",
+      opt = true,
+      module = "tailwindcss-colors",
+      config = function()
+         require("tailwindcss-colors").setup()
+      end,
+   }
+   use {
+      "jose-elias-alvarez/null-ls.nvim",
+      after = "nvim-lspconfig",
+      config = function()
+         require "custom.plugins.null-ls"
+      end,
+   }
    -- use {
    --    "max397574/better-escape.nvim",
    --    event = "InsertEnter",

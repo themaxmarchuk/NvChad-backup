@@ -13,7 +13,7 @@ M.options, M.ui, M.mappings, M.plugins = {}, {}, {}, {}
 
 -- Set guifont if running inside neovide
 if vim.g.neovide then
-  vim.api.nvim_set_option("guifont", "RobotoMono Nerd Font:h18")
+   vim.api.nvim_set_option("guifont", "RobotoMono Nerd Font:h18")
 end
 
 M.options = {
@@ -22,11 +22,11 @@ M.options = {
 }
 
 M.ui = {
-  theme = "tokyonight"
+   theme = "tokyonight",
 }
 
 M.ui = {
-  hl_override = "custom.colors"
+   hl_override = "custom.colors",
 }
 
 -- LSP mapping overrides
@@ -34,22 +34,22 @@ vim.api.nvim_set_keymap("n", "<C-f>", "<cmd>lua vim.lsp.buf.formatting()<CR>", {
 
 -- Override the default plugin mappings
 M.mappings.plugins = {
-  comment = {
-    toggle = "<C-c>"
-  }
+   comment = {
+      toggle = "<C-c>",
+   },
 }
 
 -- NvChad included plugin options & overrides
 M.plugins = {
    options = {
-        lspconfig = {
+      lspconfig = {
          -- path of file containing setups of different lsps (ex : "custom.plugins.lspconfig"), read the docs for more info
          setup_lspconf = "custom.plugins.lspconfig",
-        }
+      },
    },
    status = {
-     colorizer = true,
-     vim_matchup = false
+      colorizer = true,
+      vim_matchup = false,
    },
    -- To change the Packer `config` of a plugin that comes with NvChad,
    -- add a table entry below matching the plugin github name
@@ -58,12 +58,12 @@ M.plugins = {
    --              use "(custom.configs).my_func()" to call a function
    --              use "custom.blankline" to call a file
    default_plugin_config_replace = {
-     nvim_comment = "custom.plugins.comment",
-     nvim_treesitter = "custom.plugins.treesitter",
-     feline = "custom.plugins.feline",
-     nvim_cmp = "custom.plugins.cmp",
-     gitsigns = "custom.plugins.gitsigns",
-   }
+      nvim_comment = "custom.plugins.comment",
+      nvim_treesitter = "custom.plugins.treesitter",
+      feline = "custom.plugins.feline",
+      nvim_cmp = "custom.plugins.cmp",
+      gitsigns = "custom.plugins.gitsigns",
+   },
 }
 
 return M

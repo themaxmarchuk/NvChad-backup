@@ -14,7 +14,7 @@ ts_config.setup {
       use_languagetree = true,
    },
    context_commentstring = {
-     enable = true,
-     enable_autocmd = false
-   }
+      enable = true,
+      enable_autocmd = false,
+   },
 }
