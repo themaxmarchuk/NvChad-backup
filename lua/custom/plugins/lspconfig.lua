@@ -22,7 +22,7 @@ M.setup_lsp = function(attach, capabilities)
 
       if lsp == "cssls" then
          -- windows only fix for cssls
-         if vim.fn.has "win32" then
+         if vim.fn.has "win32" == 1 then
             opts.cmd = { "vscode-css-language-server.cmd", "--stdio" }
          end
 
@@ -35,14 +35,14 @@ M.setup_lsp = function(attach, capabilities)
 
       if lsp == "html" then
          -- windows only fix for html
-         if vim.fn.has "win32" then
+         if vim.fn.has "win32" == 1 then
             opts.cmd = { "vscode-html-language-server.cmd", "--stdio" }
          end
       end
 
       if lsp == "tailwindcss" then
          -- windows only fix for tailwindcss
-         if vim.fn.has "win32" then
+         if vim.fn.has "win32" == 1 then
             opts.cmd = { "tailwindcss-language-server.cmd", "--stdio" }
          end
 
@@ -57,7 +57,7 @@ M.setup_lsp = function(attach, capabilities)
 
       if lsp == "jsonls" then
          -- windows only fix for jsonls
-         if vim.fn.has "win32" then
+         if vim.fn.has "win32" == 1 then
             opts.cmd = { "vscode-json-language-server.cmd", "--stdio" }
          end
 
@@ -96,16 +96,13 @@ M.setup_lsp = function(attach, capabilities)
       end
 
       if lsp == "sumneko_lua" then
-         local sumneko_root
-         local sumneko_binary
-
          -- Setup binary path on windows
-         if vim.fn.has "win32" then
-            sumneko_root = "C:\\tools\\sumneko_lua\\"
-            sumneko_binary = sumneko_root .. "bin\\lua-language-server\\Windows\\lua-language-server.exe"
+         if vim.fn.has "win32" == 1 then
+            vim.notify "I AM BEING EXECUTED AND LUA IS STUPID!"
+            local sumneko_root = "C:\\tools\\sumneko_lua\\"
+            local sumneko_binary = sumneko_root .. "bin\\lua-language-server\\Windows\\lua-language-server.exe"
+            opts.cmd = { sumneko_binary, "-E", sumneko_root .. "main.lua" }
          end
-
-         opts.cmd = { sumneko_binary, "-E", sumneko_root .. "main.lua" }
 
          -- lua-dev sets things up for neovim plugin development, we can just pass our current lspconfig
          -- settings and it will generate a config with proper path setups for all installed plugins and
