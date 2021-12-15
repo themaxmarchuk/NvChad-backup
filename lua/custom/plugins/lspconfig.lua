@@ -98,7 +98,6 @@ M.setup_lsp = function(attach, capabilities)
       if lsp == "sumneko_lua" then
          -- Setup binary path on windows
          if vim.fn.has "win32" == 1 then
-            vim.notify "I AM BEING EXECUTED AND LUA IS STUPID!"
             local sumneko_root = "C:\\tools\\sumneko_lua\\"
             local sumneko_binary = sumneko_root .. "bin\\lua-language-server\\Windows\\lua-language-server.exe"
             opts.cmd = { sumneko_binary, "-E", sumneko_root .. "main.lua" }
