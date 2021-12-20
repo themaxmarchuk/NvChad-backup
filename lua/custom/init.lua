@@ -41,7 +41,6 @@ hooks.add("install_plugins", function(use)
    use "folke/lua-dev.nvim"
    use {
       "themaxmarchuk/tailwindcss-colors.nvim",
-      opt = true,
       module = "tailwindcss-colors",
       config = function()
          require("tailwindcss-colors").setup()
