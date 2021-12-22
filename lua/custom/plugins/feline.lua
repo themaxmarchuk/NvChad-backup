@@ -1,5 +1,6 @@
 local colors = require("colors").get()
 local lsp = require "feline.providers.lsp"
+local lsp_severity = vim.diagnostic.severity
 
 local icon_styles = {
    default = {
@@ -43,10 +44,12 @@ local icon_styles = {
 }
 
 local config = require("core.utils").load_config().plugins.options.statusline
+
 -- statusline style
 local user_statusline_style = config.style
 local statusline_style = icon_styles[user_statusline_style]
--- if show short statusline on small screens
+
+-- show short statusline on small screens
 local shortline = config.shortline == false and true
 
 -- Initialize the components table
@@ -55,7 +58,6 @@ local components = {
    inactive = {},
 }
 
--- Initialize left, mid and right
 table.insert(components.active, {})
 table.insert(components.active, {})
 table.insert(components.active, {})
@@ -152,7 +154,7 @@ components.active[1][6] = {
 components.active[1][7] = {
    provider = "diagnostic_errors",
    enabled = function()
-      return lsp.diagnostics_exist "Error"
+      return lsp.diagnostics_exist(lsp_severity.ERROR)
    end,
 
    hl = { fg = colors.red },
@@ -162,7 +164,7 @@ components.active[1][7] = {
 components.active[1][8] = {
    provider = "diagnostic_warnings",
    enabled = function()
-      return lsp.diagnostics_exist "Warning"
+      return lsp.diagnostics_exist(lsp_severity.WARN)
    end,
    hl = { fg = colors.yellow },
    icon = "  ",
@@ -171,7 +173,7 @@ components.active[1][8] = {
 components.active[1][9] = {
    provider = "diagnostic_hints",
    enabled = function()
-      return lsp.diagnostics_exist "Hint"
+      return lsp.diagnostics_exist(lsp_severity.HINT)
    end,
    hl = { fg = colors.grey_fg2 },
    icon = "  ",
@@ -180,7 +182,7 @@ components.active[1][9] = {
 components.active[1][10] = {
    provider = "diagnostic_info",
    enabled = function()
-      return lsp.diagnostics_exist "Information"
+      return lsp.diagnostics_exist(lsp_severity.INFO)
    end,
    hl = { fg = colors.green },
    icon = "  ",
@@ -189,6 +191,7 @@ components.active[1][10] = {
 components.active[2][1] = {
    provider = function()
       local Lsp = vim.lsp.util.get_progress_messages()[1]
+
       if Lsp then
          local msg = Lsp.message or ""
          local percentage = Lsp.percentage or 0
@@ -210,10 +213,11 @@ components.active[2][1] = {
 
          if percentage >= 70 then
             return string.format(" %%<%s %s %s (%s%%%%) ", success_icon[frame + 1], title, msg, percentage)
-         else
-            return string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
          end
+
+         return string.format(" %%<%s %s %s (%s%%%%) ", spinners[frame + 1], title, msg, percentage)
       end
+
       return ""
    end,
    enabled = shortline or function(winid)
@@ -371,7 +375,7 @@ components.active[3][10] = {
 }
 
 require("feline").setup {
-   colors = {
+   theme = {
       bg = colors.statusline_bg,
       fg = colors.fg,
    },
