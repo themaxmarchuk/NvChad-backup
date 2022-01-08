@@ -5,7 +5,23 @@ M.setup_lsp = function(attach, capabilities)
 
    -- lspservers with default config
 
-   local servers = { "gopls", "ccls", "tsserver", "cssls", "html", "jsonls", "tailwindcss", "sumneko_lua" }
+   local servers = {
+      "gopls",
+      "ccls",
+      "tsserver",
+      "cssls",
+      "html",
+      "jsonls",
+      "tailwindcss",
+      "sumneko_lua",
+      "rust_analyzer",
+   }
+
+   -- servers which should have their formatting capabilities disabled
+   local disable_formatting = {
+      tsserver = true,
+      rust_analyzer = true,
+   }
 
    for _, lsp in ipairs(servers) do
       local opts = {
@@ -15,6 +31,14 @@ M.setup_lsp = function(attach, capabilities)
             debounce_text_changes = 150,
          },
       }
+
+      -- disable formatting for select servers
+      if disable_formatting[lsp] == true then
+         opts.on_attach = function(client, bufnr)
+            client.resolved_capabilities.document_formatting = false
+            attach(client, bufnr)
+         end
+      end
 
       -- NOTE: on windows, language servers installed using npm need to have
       -- .cmd as a suffix, otherwise they won't work. But only for servers
