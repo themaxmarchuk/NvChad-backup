@@ -65,37 +65,16 @@ M.plugins = {
       better_escape = true, -- map to <ESC> with no lag
       feline = true, -- statusline
       gitsigns = true,
-      lspsignature = true, -- lsp enhancements
       vim_matchup = true, -- improved matchit
-      cmp = true,
       nvimtree = true,
-      autopairs = true,
    },
    options = {
       packer = {
          init_file = "plugins.packerInit",
       },
-      autopairs = { loadAfter = "nvim-cmp" },
-      cmp = {
-         lazy_load = true,
-      },
-      lspconfig = {
-         setup_lspconf = "", -- path of file containing setups of different lsps
-      },
       nvimtree = {
-         enable_git = 0,
          -- packerCompile required after changing lazy_load
          lazy_load = true,
-
-         ui = {
-            allow_resize = true,
-            side = "left",
-            width = 25,
-            hide_root_folder = true,
-         },
-      },
-      luasnip = {
-         snippet_path = {},
       },
       statusline = {
          -- hide, show on specific filetypes
@@ -174,7 +153,7 @@ M.mappings = {
 }
 
 -- plugins related mappings
-
+-- To disable a mapping, equate the variable to "" or false or nil in chadrc
 M.mappings.plugins = {
    bufferline = {
       next_buffer = "<TAB>",
